@@ -1,0 +1,4 @@
+This folder contains all code needed to append columns containing YLD, YLL, and DALY to the BNMDR-SMA registry. 
+MAIN_DALY_SMA cleans and imputes the data, and appends new columns conaining DALY, YLD, and YLL. This code calls the Functions_SMAProject and Setup_Env codes.
+Functions_SMAProject contains more flexible functions to execute repeatable actions needed in MAIN.
+Setup_Env loads and installs all dependencies.

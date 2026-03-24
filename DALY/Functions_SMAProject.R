@@ -92,6 +92,21 @@ funWeightSMA <- function(x) {
                                   .default = 0))
 }
 
+weightLotSMA <- function(sv, state) {
+  ## Helper function to extract disability weight by health state and severity
+  ## Use this to acess the weight table to avoid getting NA output
+  try(if (!(sv %in% 1:6)) stop("Input severity as an integer between 1-6"))
+  try(if (!(state %in% c("MOT", "PULM", "MSK", "SCOL", "SPEECH", "FEED")))
+                                     stop("Input valid state from:
+                                     MOT, PULM, MSK, SCOL, SPEECH, FEED"))
+  # Extract the weight from the table given the input
+  if (state %in% c("SCOL", "SPEECH", "FEED")) {sv <- 1}
+  if (state %in% c("MOT", "PULM") & sv > 3) {sv <- sv - 3}
+  wt <- weightsSMA[sv, state]
+  wt
+}
+
+      
 funYLDSMA <- function(x) {
   x %>%
   # Calculate DALY based on weights (Takes all variables for SMA)
